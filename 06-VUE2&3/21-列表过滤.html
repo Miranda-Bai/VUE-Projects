@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="js/vue.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h2>Person List</h2>
+      <input type="text" placeholder="pls enter name..." v-model="keyWord" />
+      <ul>
+        <li v-for="person in filPersonLst" :key="person.pId">
+          Name: {{person.name}}--gender: {{person.gender}}--age: {{person.age}}
+        </li>
+      </ul>
+    </div>
+    <script>
+      new Vue({
+        el: "#root",
+        data: {
+          keyWord: "",
+          personLst: [
+            {
+              pId: "001",
+              name: "马冬梅",
+              gender: "female",
+              age: 18,
+            },
+            {
+              pId: "002",
+              name: "周冬雨",
+              gender: "female",
+              age: 23,
+            },
+            {
+              pId: "003",
+              name: "周杰伦",
+              gender: "male",
+              age: 54,
+            },
+            {
+              pId: "004",
+              name: "温兆伦",
+              gender: "male",
+              age: 43,
+            },
+          ],
+          //   filPersonLst: [],
+        },
+        computed: {
+          filPersonLst() {
+            return this.personLst.filter((p) => {
+              // 不包含返回-1，包含返回索引值
+              return p.name.indexOf(this.keyWord) != -1;
+            });
+          },
+        },
+        watch: {
+          /* keyWord(val) {
+            //filter()返回过滤后的数组
+            this.filPersonLst = this.personLst.filter((p) => {
+              // 不包含返回-1，包含返回索引值
+              return p.name.indexOf(val) != -1;
+            });
+          }, */
+          /* keyWord: {
+            immediate: true,
+            handler(val) {
+              //filter()返回过滤后的数组
+              this.filPersonLst = this.personLst.filter((p) => {
+                // 不包含返回-1，包含返回索引值
+                return p.name.indexOf(val) != -1;
+              });
+            },
+          }, */
+        },
+      });
+    </script>
+  </body>
+</html>

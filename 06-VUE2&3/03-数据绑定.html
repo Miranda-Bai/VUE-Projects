@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      单项数据绑定:
+      <input type="text" v-bind:value="name" />
+      双项数据绑定:
+      <!-- v-model并不支持所有标签，只能用在输入类元素上，例如表单元素 -->
+      <input type="text" v-model:value="name" />
+      <!-- 简写 不需要:value，因为默认找的是value -->
+      <input type="text" v-model="name" />
+    </div>
+    <script>
+      new Vue({
+        el: "#root",
+        data: {
+          name: "Miranda",
+        },
+      });
+    </script>
+  </body>
+</html>

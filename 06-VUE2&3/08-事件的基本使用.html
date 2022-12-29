@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="js/vue.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="root">
+      <h2>Welcome to {{name}}!</h2>
+      <button v-on:click="showInfo">click me</button>
+      <button @click="showInfo2(66,$event)">click me2</button>
+    </div>
+    <script>
+      Vue.config.productionTip = false; //阻止vue启动时生成生产提示
+
+       const vm = new Vue({
+           el:'.root',
+           //数据
+           data:{
+              name:'Auckland'
+           },
+           //方法 event是绑定事件的标签
+           methods:{
+              showInfo(event){
+                  alert(event.target.innerText);
+                  console.log(event);
+              },
+              showInfo2(number, event){
+                  alert(number);
+              }
+
+           },
+       });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="js/vue.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h2>Person List</h2>
+      <ul>
+        <!-- 遍历数组 -->
+        <li v-for="person in personLst" :key="person.pId">
+          Name: {{person.name}}&nbsp;&nbsp;age: {{person.age}}
+        </li>
+      </ul>
+      <hr />
+      <h2>Person List (another way to display)</h2>
+      <ul>
+        <!-- 也可以把in换成of -->
+        <li v-for="(person,index) in personLst" :key="index">
+          Name: {{person.name}}&nbsp;&nbsp;age: {{person.age}}---{{index}}
+        </li>
+      </ul>
+      <hr />
+      <h2>Car information</h2>
+      <ul>
+        <!-- 遍历对象 -->
+        <li v-for="(value, attrName) of car" :key="attrName">{{attrName}}: {{value}}</li>
+      </ul>
+      <hr />
+      <h2>Reading String</h2>
+      <ul>
+        <!-- 遍历字符串 -->
+        <li v-for="(value, index) of str" :key="index">{{value}}: {{index}}</li>
+      </ul>
+      <hr />
+      <h2>遍历指定次数</h2>
+      <ul>
+        <!-- 遍历指定次数 -->
+        <li v-for="(number, index) of 5" :key="index">{{number}}: {{index}}</li>
+      </ul>
+    </div>
+    <script>
+      new Vue({
+        el: "#root",
+        data: {
+          personLst: [
+            {
+              pId: "001",
+              name: "Miranda",
+              age: 18,
+            },
+            {
+              pId: "002",
+              name: "Grace",
+              age: 23,
+            },
+            {
+              pId: "003",
+              name: "Andy",
+              age: 54,
+            },
+          ],
+          car: {
+            name: "Volkswagen",
+            age: 2007,
+            type: "Beetle",
+            color: "red",
+          },
+          str: "Hello World",
+        },
+      });
+    </script>
+  </body>
+</html>

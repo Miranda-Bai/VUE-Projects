@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="js/vue.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h2>Today's weather is really {{info}} !</h2>
+      <!-- @click=""里面可以写一些很简单的语句 -->
+      <button @click="isHot = !isHot">toggle the weather</button>
+    </div>
+    <script>
+      new Vue({
+        el: "#root",
+        data: {
+            isHot:true,
+        },
+        computed:{
+            info(){
+               return this.isHot?'hot' : 'cool';
+            }
+        },
+        methods: {
+            // changeWeather(){
+            //     this.isHot = !this.isHot;
+            // }
+        },
+      });
+    </script>
+  </body>
+</html>

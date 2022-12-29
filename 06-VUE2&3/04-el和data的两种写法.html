@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="js/vue.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <!-- 容器 -->
+    <div class="root">
+      <h1>Hello VUE!{{name}}&nbsp;&nbsp;&nbsp;{{address}}</h1>
+    </div>
+    <div class="nav">
+      <h1>Hello VUE!{{name}}</h1>
+    </div>
+    <script>
+          // el两种写法
+        const v = new Vue({
+          // 先不关联容器
+          // el:'.root',
+          data: {
+            name: `I'm Miranda`,
+            address: "New Zealand",
+          },
+        });
+        console.log(v);
+        // 此时关联容器
+        setTimeout(() => {
+          v.$mount(".root");
+        }, 1000);
+
+      //   data两种写法
+        new Vue({
+          el:'.nav',
+          data:newData,
+        });
+      //   函数式写法 用到组件时只能用这种写法
+      data:function newData(){
+          return {
+              name:'Miranda0315'
+          };
+      }
+    </script>
+  </body>
+</html>
