@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        内置指定
+        v-bind ： 单向绑定解析表达式，可简写为 :xxx
+        v-model： 双向绑定数据
+        v-for ：遍历数组/对象/字符串
+        v-on：绑定事件监听，可简写为@
+        v-if：条件渲染（动态控制节点是否存在
+        v-else：条件渲染（动态控制节点是否存在
+        v-show：条件渲染（动态控制节点是否展示
+        v-text：向其所在的标签插入文本
+        v-html: 向其所在的标签插入文本,支持结构解析，有安全性问题，容易导致xss攻击，只能在可信的地方用，不要在用户提交的地方用
+        v-cloak：无值网速过慢时，可以让未解析的模版不显示（通过属性样式）
+        v-once：无值，节点初次渲染后就为静态资源了，只执行一次
+        v-pre：让vue跳过其所在节点的编译内容，加快编译
+     -->
+    <div id="root">
+        <div>{{name}}</div>
+        <div v-text="str"></div>
+        <div v-html="str"></div>
+    </div>
+    <script>
+      new Vue({
+        el: "#root",
+        data: {
+            name:'Miranda',
+            str:'<h3>hello world</h3>'
+        },
+      });
+    </script>
+  </body>
+</html>

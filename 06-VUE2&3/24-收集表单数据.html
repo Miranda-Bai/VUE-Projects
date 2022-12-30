@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js" type="text/javascript"></script>
+    <style>
+        *{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <form @submit.prevent="demo">
+            <label for="username"> Username: </label>          
+            <input type="text" id="username" v-model="userInfo.account"></input><br>
+            <label for="password">Password: </label>
+            <input type="password" id="password" v-model="userInfo.password"></input><br>
+            <label for="age">Age: </label>
+            <!-- v-model.number只能往vue传数字 -->
+            <input type="text" id="age" v-model.number="userInfo.age"></input><br>
+            Gender: 
+            <input type="radio" value="male" name="gender" v-model="userInfo.gender">male</input>
+            <input type="radio" value="female" name="gender" v-model="userInfo.gender">female</input>
+            <br>
+            Hobby:
+            <input type="checkbox" name="hobby" value="Studying" v-model="userInfo.hobbyArr">Studying</input>
+            <input type="checkbox" name="hobby" value="Playing games" v-model="userInfo.hobbyArr">Playing games</input>
+            <input type="checkbox" name="hobby" value="Hiking" v-model="userInfo.hobbyArr">Hiking</input>
+            <br>
+            Campus region: 
+            <select v-model="userInfo.campus">
+                <option value="">select your campus</option>
+                <option value="Auckland" >Auckland</option>
+                <option value="Hamilton" >Hamilton</option>
+                <option value="Wellington" >Wellington</option>
+                <option value="Dunedin" >Dunedin</option>
+            </select>
+            <br>
+            Additonal info:
+            <!-- v-model.lazy 失去焦点后在收集，不要实时收集 -->
+            <textarea v-model.lazy="userInfo.addtionalInfo"></textarea>
+            <br>
+            <input type="checkbox" v-model="userInfo.ifAgree">I read and agree <a href="#">the customer agreement</a> </input>
+            <br>
+            <button>submit</button>
+        </form>
+        
+    </div>
+    <script>
+        new Vue({
+            el:'#root',
+            data:{
+                userInfo:{
+                    account:'',
+                    password:'',
+                    age:18,
+                    gender:'female',
+                    hobbyArr:[],
+                    campus:'',
+                    addtionalInfo:'',
+                    ifAgree:'',
+                }         
+            },
+            methods: {
+                demo(){
+                    console.log(JSON.stringify(this.userInfo));
+                }
+            },
+        })
+    </script>
+</body>
+</html>

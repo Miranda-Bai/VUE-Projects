@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <!-- <h2>school name: {{schoolName}}</h2>
+      <h2>address: {{address}}</h2>
+      <hr />
+      <h2>student name: {{stuName}}</h2>
+      <h2>stude age: {{age}}</h2> -->
+
+      <h1>{{msg}}</h1>
+      <school></school>
+      <hr />
+      <student></student>
+      <student></student>
+    </div>
+
+    <div id="root2">
+      <hello></hello>
+    </div>
+    <script>
+      // 1.创建组件 2.注册组件 3.使用组件,编写组件标签
+      //   data必须写成函数，避免组件被复用时，数据存在引用关系
+      // 创建school组件 extend中传入配置对象
+      //   组件定义时不要写el配置项，因为所有组件都要被一个vm管理，由vm决定服务于哪个容器
+      const school = Vue.extend({
+        template: `
+                <div>
+                    <h2>school name: {{schoolName}}</h2>
+                    <h2>address: {{address}}</h2>
+                </div>
+            `,
+        data() {
+          return {
+            schoolName: "Wintec",
+            address: "Hamilton",
+          };
+        },
+      });
+      // 创建student组件
+      const student = Vue.extend({
+        template: `
+            <div>
+                <h2>student name: {{stuName}}</h2>
+                <h2>stude age: {{age}}</h2>
+            </div>
+        `,
+        data() {
+          return {
+            stuName: "Miranda",
+            age: 18,
+          };
+        },
+      });
+      // 创建hello组件
+      const hello = Vue.extend({
+        template: `
+            <div>
+                <h2>{{hello}}</h2>
+            </div>
+        `,
+        data() {
+          return {
+            hello: "Good day!",
+          };
+        },
+      });
+      //   注册全局组件key,value
+      Vue.component("hello", hello);
+
+      // 创建vm
+      new Vue({
+        el: "#root",
+        data: {
+          msg: "using components",
+        },
+        components: {
+          school: school,
+          student: student,
+        },
+      });
+
+      new Vue({
+        el: "#root2",
+      });
+    </script>
+  </body>
+</html>
