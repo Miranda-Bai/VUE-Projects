@@ -9,7 +9,8 @@
 
         <form id="new-todo-form" @submit.prevent="addTodo">
             <h4>What's on your todo list?</h4>
-            <input type="text" name="content" id="content" placeholder="e.g. make a video" v-model="input_content" :class="red"/>
+            <input type="text" name="content" id="content" :placeholder="myplaceholder" v-model="input_content"
+                :class="red" @focus="getFocus" />
 
             <h4>Pick a category</h4>
             <div class="options">
@@ -33,6 +34,7 @@
     </section>
 </template>
 <script>
+
 import { nanoid } from 'nanoid'
 
 export default {
@@ -42,15 +44,17 @@ export default {
             name: "Miranda",
             input_content: '',
             input_category: 'personal',
-            red:''
+            red: '',
+            myplaceholder: 'e.g. make a video'
         }
     },
-    props:['addTodoLst'],
+    props: ['addTodoLst'],
     methods: {
         addTodo() {
-            if(!this.input_content.trim()){
-                this.input_content='please input !!'
-                this.red='red'
+            if (!this.input_content.trim()) {
+                this.myplaceholder = 'please input !!'
+                this.red = 'red'
+
                 return;
             }
 
@@ -60,15 +64,20 @@ export default {
             // 通知App组件去添加一个todo对象
             this.addTodoLst(todoObj);
             //清空输入框
-            this.input_content='';
+            this.input_content = '';
+            this.myplaceholder = 'e.g. make a video'
+        },
+        getFocus() {
+            this.red = '';
         }
     },
 }
 </script>
 <style scoped>
-.red{
-    color:var(--danger) !important;
+.red {
+    background-color: var(--danger) !important;
 }
+
 .greeting .title {
     display: flex;
 }

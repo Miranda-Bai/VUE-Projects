@@ -7,7 +7,7 @@
                 <span class="bubble"></span>
             </label>
             <div class="sum">
-                {{ completedSum }} completed / {{ total }} in total
+                {{ completedSum }} / {{ total }} 
             </div>
             <div class="actions">
                 <button class="delete" @click="removeAll()">Delete all completed things</button>
