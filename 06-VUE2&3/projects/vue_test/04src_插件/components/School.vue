@@ -19,6 +19,7 @@ export default {
             address: 'Auckland',
         };
     },
+   
 };
 
 </script>

@@ -22,7 +22,8 @@ export default {
     },
     methods: {
         test(){
-            this.hello();
+            // console.log(this.$root.hello())
+            this.hello;
         }
     },
 };

@@ -3,14 +3,15 @@ import { createApp } from "vue";
 import App from "./App.vue";
 
 // 引入插件
-import plugins from "./plugins";
+import myPlugins from "./plugins";
 
 
-const vm = createApp(App);
+const app = createApp(App);
 // 使用插件
-vm.use(plugins);
-vm.mount("#app");
-console.log(vm)
+app.use(myPlugins);
+app.mount("#app");
+
+// console.log(app)
 
 /* setup(){
     // getCurrentInstance() 获取当前组件实例
