@@ -46,11 +46,6 @@ export default {
             store,
         }
     },
-    data() {
-        return {
-             
-        };
-    },
     methods:{
         incrementWait(){
             setTimeout(() => {

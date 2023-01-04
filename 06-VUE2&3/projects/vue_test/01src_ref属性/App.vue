@@ -25,7 +25,7 @@ export default {
     showDOM(){
       // 得到组件的实例对象
       console.log(this.$refs.school)
-      // 得到真实DOM元素ß
+      // 得到真实DOM元素
       console.log(this.$refs.title)
     }
   },

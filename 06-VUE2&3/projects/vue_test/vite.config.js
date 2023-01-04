@@ -1,9 +1,23 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import myPlugins from './04src_插件/plugins'
+//配置按需倒入elementPlus UI组件库
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
+
 
 // https://vitejs.dev/config/
 export default defineConfig({
   // plugins: [vue(),myPlugins],  ?????
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    // 配置按需倒入elementPlus UI组件库
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
+  ],
 })
