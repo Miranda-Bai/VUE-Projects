@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 源数据
+      let person = {
+        name: "Miranda",
+        age: 18,
+      };
+
+      // vue3中实现响应式 proxy + reflect
+      const p = new Proxy(person, {
+        get(target, propName) {
+          console.log("someone is reading data in person");
+          console.log(target, propName);
+          // return target[propName];
+          return Reflect.get(target, propName);
+        },
+        // 增加属性和改属性值时都会调用该函数
+        set(target, propName, value) {
+          console.log(`some is rewriting ${propName}`);
+          // target[propName] = value;
+          Reflect.set(target, propName, value);
+        },
+        deleteProperty(target, propName) {
+          console.log(`some is deleting ${propName}`);
+          // delete 删除对象属性会有一个布尔返回值
+          // return delete target[propName];
+          return Reflect.deleteProperty(target, propName);
+        },
+      });
+    </script>
+  </body>
+</html>

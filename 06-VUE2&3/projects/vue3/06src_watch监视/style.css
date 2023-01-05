@@ -55,7 +55,7 @@ button {
   font-weight: 500;
   font-family: inherit;
   /* background-color: #1a1a1a; */
-  background-color: rgba(242, 50, 82, 0.87);
+  background-color: rgba(239, 93, 117, 0.87);
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -87,6 +87,6 @@ button:focus-visible {
     color: #747bff;
   }
   button {
-    /* background-color: #f9f9f9; */
+    background-color: #f9f9f9;
   }
 }
