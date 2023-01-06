@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function data() {
+        console.log(arguments);
+      }
+
+      data("miranda", "andy", "grace");
+
+      // rest参数 输出数组 可以用数组的方法
+      function data2(...args) {
+        console.log(args);
+      }
+
+      data2("nihao", "apple", "pineapple");
+
+      // rest参数 必须放到参数的最后
+      function test(a, b, ...args) {
+        console.log(a, b, args);
+      }
+
+      test(1, 2, 3, 4, 5, 6);
+    </script>
+  </body>
+</html>

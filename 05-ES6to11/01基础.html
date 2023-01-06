@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 变量的解构赋值
+        // 1.数组的解构
+        const F4 = ['Monkey', 'Snake', 'Bear', 'Vampire'];
+        let [m, s, b, v] = F4;
+        console.log(m, s, b, v)
+
+        // 2.对象的解构
+        const zhao={
+            name:"Grace",
+            age:"Unknown",
+            xiaopin:function(){
+                console.log("she sings well")
+            }
+        };
+
+        let {name, age, xiaopin} = zhao;
+        console.log(name, age, xiaopin);
+        console.log(confirm("are u sure?"))
+    </script>
+</body>
+</html>

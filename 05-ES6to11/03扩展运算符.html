@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // ...扩展运算符能将数组转换成逗号分隔的参数序列
+      const princess = ["snowwhite", "bella", "liz"];
+
+      function drama() {
+        console.log(arguments);
+      }
+
+      drama(princess);
+      drama(...princess);
+
+      let person = {
+        name: "Bella",
+        age: 23,
+        gender: "female",
+      };
+      function test(...args) {
+        console.log("@", args, args[0].name);
+      }
+      test(person);
+    </script>
+  </body>
+</html>

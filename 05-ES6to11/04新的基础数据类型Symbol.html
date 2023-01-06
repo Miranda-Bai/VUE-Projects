@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // symbol数据是独一无二的值
+      // 调用30个symbol会得到30个不同的值，symbol.for会得到同一个相同的值
+      //   symbol数据类型的变量不能与其他数据进行运算
+    /*   let s = Symbol(1);
+      console.log(s, typeof s);
+
+      let a = Symbol(1);
+      // false
+      console.log(a === s);
+
+      let x = Symbol.for(2);
+      let y = Symbol.for(2);
+      //   true
+      console.log(x === y);
+
+      // symbol使用场景
+      let game = {};
+
+      let methods = {
+        up: Symbol(1),
+        down: Symbol(1),
+      };
+
+      game[methods.up] = function () {
+        console.log("I'm up");
+      };
+
+      game[methods.down] = function () {
+        console.log("I'm down");
+      };
+
+      console.log(game, "##", methods);
+
+      //   调用
+      game[methods.up](); */
+
+      let youxi = {
+        name: "KOH",
+        [Symbol("say")]: function () {
+          console.log("I can say now");
+        },
+        [Symbol("boom")]: function () {
+          console.log("I commit");
+        },
+      };
+      //   调用
+      console.log(youxi[Reflect.ownKeys(youxi)[0]]);
+      console.log("***", Reflect.ownKeys(youxi)[0])
+
+      console.log("--------------------")
+      console.log("***", Reflect.ownKeys(youxi)[1])
+      youxi[Reflect.ownKeys(youxi)[1]]();
+    </script>
+  </body>
+</html>
