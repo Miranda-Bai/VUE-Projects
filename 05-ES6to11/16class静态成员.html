@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Phone {
+        // 静态属性和方法属于类而不属于实例对象
+        static name = "mobile phone";
+        static change() {
+          console.log("I can change the world");
+        }
+      }
+
+      let p = new Phone();
+      console.log(p.name);
+      console.log(Phone.name);
+      console.log(Phone.change());
+    //   p.change(); error!!
+    </script>
+  </body>
+</html>

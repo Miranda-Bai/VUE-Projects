@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Phone {
+        constructor(brand, price) {
+          this.brand = brand;
+          this.price = price;
+        }
+        // 方法必须使用该语法，不能使用ES5的对象完整形式
+        ring() {
+          console.log("I can ring others!!");
+        }
+      }
+
+      class SmartPhone extends Phone {
+        constructor(brand, price, color, size) {
+          super(brand, price);
+          this.color = color;
+          this.size = size;
+        }
+        photo() {
+          console.log("I can take photo");
+        }
+      }
+
+      let sp = new SmartPhone("Apple", 2333, "silver", "12inch");
+      console.log(sp);
+      sp.photo();
+      sp.ring();
+    </script>
+  </body>
+</html>

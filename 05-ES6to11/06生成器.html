@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 生成器是一个特殊的函数
+      // 用来实现 异步编程 纯回调函数 node fs ajax mongodb
+      // 生成器函数声明时有个*
+      /*   function * gen(){
+            console.log("hello generator")
+        }
+
+        let iterator = gen();
+        // 直接调用不会执行
+        console.log(iterator);
+        iterator.next(); */
+
+      /* 
+        yield 关键字使生成器函数执行暂停，yield 关键字后面的表达式的值返回给生成器的调用者。它可以被认为是一个基于生成器的版本的 return 关键字。
+        yield 关键字实际返回一个 IteratorResult 对象，它有两个属性，value 和 done。value 属性是对 yield 表达式求值的结果，而 done 是 false，表示生成器函数尚未完全完成。
+        一旦遇到 yield 表达式，生成器的代码将被暂停运行，直到生成器的 next() 方法被调用
+         */
+      function* gen(arg) {
+        console.log("arg = ", arg);
+        let one = yield 111;
+        console.log("yield one = ", one);
+        yield 222;
+        yield 333;
+        console.log("end gen function");
+      }
+
+      // 执行获取迭代器对象
+      let itr = gen("AAA");
+      console.log("iterator next() = ", itr.next());
+      // next方法可以传入实参
+      console.log("itr.next('BBB') = ", itr.next("BBB"));
+      console.log("itr.next('CCC') = ", itr.next("CCC"));
+      console.log("itr.next('DDD') = ", itr.next("DDD"));
+    </script>
+  </body>
+</html>

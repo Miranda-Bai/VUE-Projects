@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Number.EPSILON是javascript表示的最小精度
+      console.log(0.1 + 0.2);
+      function equal(a, b) {
+        if (Math.abs(a - b) < Number.EPSILON) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      console.log(0.1 + 0.2 === 0.3);
+      console.log(equal(0.1 + 0.2, 0.3));
+
+      console.log("#########");
+      //   二进制
+      console.log(0b1010);
+      // 八进制
+      console.log(0o777);
+      // 十六进制
+      console.log(0xff);
+    </script>
+  </body>
+</html>

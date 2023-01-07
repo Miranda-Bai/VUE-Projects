@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1s后台输出111  2s后台输出222 3s后台输出333
+      function one() {
+        setTimeout(() => {
+          console.log("111");
+          itr.next();
+        }, 1000);
+      }
+      function two() {
+        setTimeout(() => {
+          console.log("222");
+          itr.next();
+        }, 2000); 
+      }
+      function three() {
+        setTimeout(() => {
+          console.log("333");
+          itr.next();
+        }, 3000);
+      }
+      function* gen() {
+        yield one();
+        yield two();
+        yield three();
+      }
+
+      // 调用生成器函数
+
+      let itr = gen();
+      itr.next();
+    </script>
+  </body>
+</html>

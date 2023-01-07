@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 接口地址：http://www.tianqiapi.com/api?version=v9&appid=23035354&appsecret=8YvlPNrz
+      const p = new Promise((resolve, reject) => {
+        // 1.创建对象
+        const xhr = new XMLHttpRequest();
+
+        // 2.初始化
+        xhr.open(
+          "GET",
+          "http://www.tianqiapi.com/api?version=v9&appid=23035354&appsecret=8YvlPNrz"
+        );
+        // 3.发送
+        xhr.send();
+        // 4.绑定事件，处理响应结果
+        xhr.onreadystatechange = function () {
+          // 判断
+          if (xhr.readyState === 4) {
+            // 判断响应状态码 200-299
+            if (xhr.status >= 200 && xhr.status < 300) {
+              // 成功
+              //   console.log(xhr.response);
+              resolve(xhr.response);
+            } else {
+              // 失败
+              //   console.error(xhr.status);
+              reject(xhr.status);
+            }
+          }
+        };
+      });
+
+      p.then(
+        function (val) {
+          console.log(val);
+        },
+        function (reason) {
+          console.error(reason);
+        }
+      );
+    </script>
+  </body>
+</html>

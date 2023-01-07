@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Phone(brand, price) {
+        this.brand = brand;
+        this.price = price;
+      }
+
+      Phone.prototype.ring = function () {
+        console.log("I can ring others");
+      };
+
+      function SmartPhone(brand, price, color, size) {
+        // 调用Phone的构造函数
+        Phone.call(this, brand, price);
+        this.color = color;
+        this.size = size;
+      }
+      //   设置子级构造函数的原型 即 继承关系
+      SmartPhone.prototype = new Phone();
+      //   可不写
+      SmartPhone.prototype.constructor = SmartPhone;
+
+      //   声明子类方法
+      SmartPhone.prototype.photo = function () {
+        console.log("I can take photo");
+      };
+
+      let sp = new SmartPhone("Apple", 4999, "red", "13.9inch");
+      console.log(sp)
+      sp.photo()
+      sp.ring()
+    </script>
+  </body>
+</html>

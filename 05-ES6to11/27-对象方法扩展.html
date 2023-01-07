@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const school = {
+        name: "AUT",
+        cities: ["Auckland", "Hamilton", "Wellington"],
+        sujects: ["Java", "Javascript", "PHP", "React"],
+      };
+      //获取对象所有键
+      /* console.log(Object.keys(school));
+      //获取对象所有的值
+      console.log(Object.values(school));
+      //entries
+      console.log(Object.entries(school)); */
+
+      const m = new Map(Object.entries(school));
+      console.log(m.get("cities"));
+    </script>
+  </body>
+</html>

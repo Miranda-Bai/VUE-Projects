@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 数组
+      const nameArr = ["Miranda", "Arial", "Liz", "Bella"];
+
+      for (let n of nameArr) {
+        console.log("for..of", n);
+      }
+
+      for (let n in nameArr) {
+        console.log("for..in", n);
+      }
+      //   对象数组
+      console.log("##########");
+      const person = [
+        {
+          name: "Grace",
+          age: 35,
+          gender: "female",
+        },
+        {
+          name: "Andy",
+          age: 54,
+          gender: "male",
+        },
+        {
+          name: "Bob",
+          age: 36,
+          gender: "male",
+        },
+      ];
+
+      for (let p of person) {
+        console.log("for..of", p);
+        // 对象
+        for (let i in p) {
+          console.log("for..in and i", p[i]);
+        }
+      }
+
+      for (let p in person) {
+        console.log("for..in", p);
+      }
+      console.log("################");
+
+    //   使用迭代器按自己的意愿进行遍历(重要‼️)
+      const movie = {
+        name: "KOH",
+        stus: [
+            "nihao",
+            "xiao",
+            "sky",
+            "knight"
+        ],
+        [Symbol.iterator](){
+            let index = 0;
+            let _this = this;
+            return {
+                next:function(){
+                    // 普通函数里的this是当前函数，可以用箭头函数升级this为外围的this
+                    if(index<_this.stus.length){
+                        const result = {
+                            value:_this.stus[index],
+                            done:false
+                        };
+                        index++;
+                        return result;
+                    }else{
+                        return {
+                            value:undefined,
+                            done:true,
+                        }
+                    }
+                }
+            }
+        }
+      };
+
+      for(let m of movie){
+        console.log(m)
+      }
+    </script>
+  </body>
+</html>

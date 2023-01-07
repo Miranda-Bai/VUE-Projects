@@ -6,14 +6,18 @@ export default {
   name: 'App',
   methods: {
     getStudentInfo(){
-      axios.get("server's url address").then(
+      let data = axios.get("http://www.tianqiapi.com/api?version=v9&appid=23035354&appsecret=8YvlPNrz").then(
         response =>{
           console.log("succeed", response.data)
+          console.log("response = ",response)
+          return response.data;
         },
         error =>{
           console.log("failed", error.message);
         }
-      )
+      );
+
+      console.log("data = ",data)
     }
   },
   
