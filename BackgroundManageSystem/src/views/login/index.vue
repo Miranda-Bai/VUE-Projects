@@ -8,7 +8,7 @@
         <svg-icon icon="user" class="svg-container"></svg-icon>
         <el-input v-model="form.name" prop="name" />
       </el-form-item>
-      <el-form-item>
+      <el-form-item  >
         <svg-icon icon="password" class="svg-container"></svg-icon>
         <el-input v-model="form.password" prop="password" />
       </el-form-item>

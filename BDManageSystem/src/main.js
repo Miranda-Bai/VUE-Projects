@@ -1,5 +1,13 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "@/router";
+// import '@/assets/less/index.less'
+//全局注册图标
+import { User, Location,Setting } from "@element-plus/icons-vue";
 
-createApp(App).mount('#app')
+const app = createApp(App);
+app.component("user", User);
+app.component("location", Location);
+app.component("setting", Setting);
+app.use(router);
+app.mount("#app");
