@@ -1,11 +1,20 @@
 <template>
-  <h2>video detail page</h2>
-  <router-link to="/">click and go to home page</router-link>
+  <AppHeader></AppHeader>
+  <!-- 视频播放 -->
+  <VideoPlay :videoInfo="videoInfo" ></VideoPlay>
+  <!-- 视频详情 -->
+  <VideoInfo :videoInfo="videoInfo" ></VideoInfo>
+  <!-- 相关推荐/评论 -->
+  <VideoBottom ></VideoBottom>
 </template>
 <script setup lang="ts">
 import axios from "axios";
 import { ref } from "vue";
 import { useRoute } from "vue-router";
+import AppHeader from '@/components/app-header.vue'
+import VideoPlay from './components/video-play.vue'
+import VideoInfo from './components/video-info.vue'
+import VideoBottom from './components/video-bottom.vue'
 
 // ?表示参数可有可无
 export interface IVideoInfo {
@@ -32,7 +41,6 @@ axios({
   params: { id: route.params.id },
 }).then(({ data }) => {
   videoInfo.value = data.result;
-  console.log(data.result);
 });
 </script>
 <style></style>

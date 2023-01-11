@@ -1,7 +1,7 @@
 <template>
     <header class="app-header">
       <!-- logo -->
-      <a class="logo" href="#">
+      <a class="logo" href="/">
         <i class="iconfont Navbar_logo"></i>
       </a>
       <!-- 搜索 -->
