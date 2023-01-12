@@ -1,12 +1,14 @@
 <template>
   <el-header>
     <div class="l-content">
-      <el-button size="small">
+      <el-button size="small" plain @click="handleCollapse">
         <el-icon :size="20">
           <Menu />
         </el-icon>
       </el-button>
-      <h3>Main Page</h3>
+      <h3>
+        <a href="/" alt="go to home page">Main Page</a>   
+      </h3>
     </div>
     <div class="r-content">
       <el-dropdown>
@@ -25,8 +27,14 @@
 </template>
 <script setup>
 import { Menu } from "@element-plus/icons-vue";
+import {useAsideStore} from '@/store/index.js'
 
 const imgSrc = new URL('@/assets/images/user.jpeg', import.meta.url).href;
+
+const store = useAsideStore();
+const handleCollapse = ()=>{
+  store.updateIsCollapse();
+}
 </script>
 <style lang="less" scoped>
 header {
@@ -50,7 +58,12 @@ header {
     margin-right: 20px;
   }
   h3{
-    color:#fff
+    color:#fff;
+    a{
+      color:#fff;
+      text-decoration: none;
+    }
+    
   }
 }
 </style>

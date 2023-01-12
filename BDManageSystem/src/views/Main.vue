@@ -23,6 +23,7 @@ import CommonAside from "@/components/CommonAside.vue";
   height: 100%;
   & > .el-container {
     height: 100%;
+    align-items: flex-start;
     & > .el-aside {
       height: 100%;
       background-color: #545c64;

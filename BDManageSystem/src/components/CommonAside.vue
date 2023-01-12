@@ -1,15 +1,19 @@
 <template>
-  <el-aside width="200px">
+  <el-aside :width="store.asideWidth">
     <el-menu
       background-color="#545c64"
       class="el-menu-vertical-demo"
       text-color="#fff"
-      :collapse="false"
+      :collapse="!store.isCollapse"
+      :collapse-transition="false"     
     >
+      <h3 v-show="store.isCollapse">Management</h3>
+      <h3 v-show="!store.isCollapse">Setting</h3>
       <el-menu-item
         v-for="item in noChildren"
         :index="item.path"
         :key="item.path"
+        @click="clickMenu(item)"
       >
         <el-icon>
           <component :is="item.icon"></component>
@@ -32,6 +36,7 @@
             v-for="(subItem, subIndex) in item.children"
             :index="subItem.path"
             :key="subIndex"
+            @click="clickMenu(subItem)"
           >
             <el-icon>
               <component :is="subItem.icon"></component>
@@ -44,6 +49,9 @@
   </el-aside>
 </template>
 <script setup>
+import { useAsideStore } from "@/store/index.js";
+import { useRouter } from "vue-router";
+
 const list = [
   {
     path: "/user",
@@ -54,6 +62,7 @@ const list = [
   },
   {
     path: "/other",
+    name: "other",
     label: "Others",
     icon: "location",
     children: [
@@ -81,9 +90,27 @@ const noChildren = list.filter((item) => !item.children);
 const hasChildren = list.filter((item) => item.children);
 
 // console.log("haschildren : ", hasChildren);
+
+const store = useAsideStore();
+// console.log("store", store)
+
+const router = useRouter();
+const clickMenu = (item) => {
+  router.push({
+    name: item.name,
+  });
+};
 </script>
 <style lang="less" scoped>
-.el-menu{
+.el-aside {
+  height: 100%;
+  .el-menu {
     border-right: none;
+    h3 {
+      line-height: 18px;
+      color: #fff;
+      text-align: center;
+    }
+  }
 }
 </style>
