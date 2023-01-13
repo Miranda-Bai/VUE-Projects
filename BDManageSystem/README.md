@@ -5,3 +5,45 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 ## Recommended IDE Setup
 
 - [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+{
+    code:200,
+    data:{
+        'orderData':{
+            "date":[],
+            "data|7":{
+                "Apple":"@integer(1000,5000)",
+                "Xiaomi":"@integer(1000,5000)",
+                "Huawei":"@integer(1000,5000)",
+                "Oppo":"@integer(1000,5000)",
+                "Vivo":"@integer(1000,5000)",
+                "One plus":"@integer(1000,5000)",
+            }
+        },
+        'videoData':[
+            {
+                name:"Xiaomi",
+                value:2999,
+            },
+            {
+                name:"Apple",
+                value:5999,
+            },
+            {
+                name:"Vivo",
+                value:1500,
+            },
+            {
+                name:"Oppo",
+                value:1999,
+            },
+            {
+                name:"Meizu",
+                value:2200,
+            },
+            {
+                name:"Samsung",
+                value:4500,
+            },
+        ]
+    }
+}

@@ -140,8 +140,8 @@ onMounted(() => {
       line-height: 80px;
       color: #fff;
       svg {
-        width: 80px;
-        height: 80px;
+        width: 50px;
+        height: 50px;
       }
     }
     .details{
