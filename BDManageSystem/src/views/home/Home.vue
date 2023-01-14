@@ -42,15 +42,24 @@
           </div>
         </el-card>
       </div>
-      <el-card style="height:280px">
-        <div ref="echart" style="height:280px"></div>
+      <el-card style="height: 280px">
+        <div ref="echart" style="height: 280px"></div>
       </el-card>
+      <div class="graph">
+        <el-card style="height: 260px">
+          <div ref="userEchart" style="height: 240px"></div>
+        </el-card>
+        <el-card style="height: 260px">
+          <div ref="videoEchart" style="height: 240px"></div>
+        </el-card>
+      </div>
     </el-col>
   </el-row>
 </template>
 <script setup>
 // import axios from "axios";
-import { onMounted, ref, getCurrentInstance } from "vue";
+import { onMounted, ref, getCurrentInstance, reactive } from "vue";
+import * as echarts from "echarts";
 
 const tableLabel = {
   name: "Sale",
@@ -83,11 +92,140 @@ let countData = ref([]);
 const getCountData = async () => {
   let res = await proxy.config.globalProperties.$api.getCountData();
   countData.value = res.tableData;
-  console.log(countData.value);
+  // console.log(countData.value);
 };
+
+// 拿到DOM标签里ref="echart"的元素
+let echart = ref(null);
+let userEchart = ref(null);
+let videoEchart = ref(null);
+
+// 关于echarts表格的渲染部分 x轴的样式
+let xOptions = reactive({
+  // 图例文字颜色
+  textStyle: {
+    color: "#333",
+  },
+  grid: {
+    left: "20%",
+  },
+  // 提示框
+  tooltip: {
+    trigger: "axis",
+  },
+  xAxis: {
+    type: "category", // 类目轴
+    data: [],
+    axisLine: {
+      lineStyle: {
+        color: "#17b3a3",
+      },
+    },
+    axisLabel: {
+      interval: 0,
+      color: "#333",
+    },
+  },
+  yAxis: [
+    {
+      type: "value",
+      axisLine: {
+        lineStyle: {
+          color: "#17b3a3",
+        },
+      },
+    },
+  ],
+  color: ["#2ec7c9", "#b6a2de", "#5ab1ef", "#ffb980", "#d87a80", "#8d98b3"],
+  series: [],
+});
+// 饼状图样式
+let pieOptions = reactive({
+  tooltip: {
+    trigger: "item",
+  },
+  color: [
+    "#0f78f4",
+    "#dd536b",
+    "#9462e5",
+    "#a6a6a6",
+    "#e1bb22",
+    "#39c362",
+    "#3ed1cf",
+  ],
+  series: [],
+});
+
+let orderData = reactive({
+  xData: [],
+  series: [],
+});
+
+let userData = reactive({
+  xData: [],
+  series: [],
+});
+let videoData = reactive({
+  series: [],
+});
+const getChartsData = async () => {
+  let result = await proxy.config.globalProperties.$api.getEchartsData();
+  console.log("result: ", result);
+  let res = result.orderData;
+  let userRes = result.userData;
+  let videoRes = result.videoData;
+
+  orderData.xData = res.date;
+  const keyArray = Object.keys(res.data[0]);
+  const series = [];
+  keyArray.forEach((key) => {
+    series.push({
+      name: key,
+      data: res.data.map((item) => item[key]),
+      type: "line",
+    });
+  });
+  orderData.series = series;
+  xOptions.xAxis.data = orderData.xData;
+  xOptions.series = orderData.series;
+  // 进行渲染
+  // 拿到DOM标签里ref="echart"的元素, 因为是ref，所以取到元素的DOM要用.value
+  let hEcharts = echarts.init(echart.value);
+  hEcharts.setOption(xOptions);
+
+  userData.xData = userRes.map((item) => item.date);
+  userData.series = [
+    {
+      name: "New Users",
+      data: userRes.map((item) => item.new),
+      type: "bar",
+    },
+    {
+      name: "Active Users",
+      data: userRes.map((item) => item.active),
+      type: "bar",
+    },
+  ];
+  xOptions.xAxis.data = userData.xData;
+  xOptions.series = userData.series;
+  let uEchart = echarts.init(userEchart.value);
+  uEchart.setOption(xOptions);
+
+  videoData.series = [
+    {
+      data: videoRes,
+      type: "pie",
+    },
+  ];
+  pieOptions.series = videoData.series;
+  let vEchart = echarts.init(videoEchart.value);
+  vEchart.setOption(pieOptions);
+};
+
 onMounted(() => {
   getTableList();
   getCountData();
+  getChartsData();
 });
 </script>
 <style lang="less">
@@ -144,23 +282,31 @@ onMounted(() => {
         height: 50px;
       }
     }
-    .details{
+    .details {
       margin-left: 15px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      .num{
+      .num {
         font-size: 30px;
         margin-bottom: 0;
         margin-top: 10px;
       }
-      .txt{
+      .txt {
         font-size: 16px;
         text-align: center;
-        color:rgb(139, 135, 135);
-        margin-top:5px;
+        color: rgb(139, 135, 135);
+        margin-top: 5px;
       }
     }
+  }
+}
+.graph{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  .el-card{
+    width: 48%;
   }
 }
 </style>

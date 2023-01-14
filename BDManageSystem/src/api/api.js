@@ -25,7 +25,7 @@ export default{
         })
     },
     //home组件右侧中间部分数据获取
-    getCountData(params){
+    getEchartsData(params){
         return request({
             url:"/home/getEchartsData",
             method:"get",

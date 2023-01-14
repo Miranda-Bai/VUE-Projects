@@ -6,9 +6,15 @@
           <Menu />
         </el-icon>
       </el-button>
-      <h3>
-        <a href="/" alt="go to home page">Main Page</a>   
-      </h3>
+      <!-- 面包屑 -->
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
+        <el-breadcrumb-item
+          ><a href="/">promotion management</a></el-breadcrumb-item
+        >
+        <el-breadcrumb-item>promotion list</el-breadcrumb-item>
+        <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
+      </el-breadcrumb>
     </div>
     <div class="r-content">
       <el-dropdown>
@@ -27,14 +33,14 @@
 </template>
 <script setup>
 import { Menu } from "@element-plus/icons-vue";
-import {useAsideStore} from '@/store/index.js'
+import { useAsideStore } from "@/store/index.js";
 
-const imgSrc = new URL('@/assets/images/user.jpeg', import.meta.url).href;
+const imgSrc = new URL("@/assets/images/user.jpeg", import.meta.url).href;
 
 const store = useAsideStore();
-const handleCollapse = ()=>{
+const handleCollapse = () => {
   store.updateIsCollapse();
-}
+};
 </script>
 <style lang="less" scoped>
 header {
@@ -51,19 +57,18 @@ header {
     border-radius: 50%;
   }
 }
-.l-content{
+.l-content {
   display: flex;
   align-items: center;
-  .el-button{
+  .el-button {
     margin-right: 20px;
   }
-  h3{
-    color:#fff;
-    a{
-      color:#fff;
+  h3 {
+    color: #fff;
+    a {
+      color: #fff;
       text-decoration: none;
     }
-    
   }
 }
 </style>

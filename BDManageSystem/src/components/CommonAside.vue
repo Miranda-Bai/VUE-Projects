@@ -99,7 +99,11 @@ const clickMenu = (item) => {
   router.push({
     name: item.name,
   });
+  // pinia管理
+  store.selectMenu(item);
 };
+
+
 </script>
 <style lang="less" scoped>
 .el-aside {

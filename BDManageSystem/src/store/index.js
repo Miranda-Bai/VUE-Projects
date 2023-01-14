@@ -1,9 +1,10 @@
 import { defineStore } from "pinia";
 
-export const useAsideStore = defineStore("aside",{
+export const useAsideStore = defineStore("aside", {
   state: () => {
     return {
       isCollapse: true,
+      currentMenu: null,
     };
   },
   getters: {
@@ -15,6 +16,12 @@ export const useAsideStore = defineStore("aside",{
     //functions
     updateIsCollapse() {
       this.isCollapse = !this.isCollapse;
+    },
+    selectMenu(val) {
+      // 判断
+      val.name === "home"
+        ? (this.currentMenu = null)
+        : (this.currentMenu = val.name);
     },
   },
 });
