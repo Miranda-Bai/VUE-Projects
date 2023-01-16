@@ -57,6 +57,7 @@ const handleClose = (tag, index) => {
   padding: 10px;
   padding-bottom: 0;
   width: 100%;
+  // height: 30px;
   .el-tag {
     margin-right: 10px;
     cursor: pointer;

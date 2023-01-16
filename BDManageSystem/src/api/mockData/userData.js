@@ -41,6 +41,7 @@ export default {
    */
   getUserList: (config) => {
     const { name, page = 1, limit = 10 } = param2Obj(config.url);
+    // console.log("config.url:", config.url)
     console.log("name:" + name, "page:" + page, "分页大小limit:" + limit);
     const mockList = List.filter((user) => {
       if (
@@ -103,7 +104,9 @@ export default {
       List = List.filter((u) => u.id !== id);
       return {
         code: 200,
-        message: "删除成功",
+        data:{
+          message: "删除成功",
+        }
       };
     }
   },

@@ -35,10 +35,22 @@ export default{
         })
     },
     getUserData(params){
-        // console.log("params:", params)
+        // console.log("params in api:", params)
         return request({
             url:"/user/getUser",
             method:"get",
+            //params:{
+            //   total:0,
+            //   page:1,
+            // }
+            data:params,
+            mock:true,
+        })
+    },
+    addUser(params){
+        return request({
+            url:"/user/add",
+            method:"post",
             data:params,
             mock:true,
         })

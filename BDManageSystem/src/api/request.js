@@ -41,6 +41,7 @@ function request(options) {
   options.method = options.method || "get";
   if (options.method.toLowerCase() === "get") {
     options.params = options.data;
+    // console.log("options.params", options.params)
   }
   //对mock的处理
   let isMock = config.mock;

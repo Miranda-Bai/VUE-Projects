@@ -39,6 +39,7 @@ import CommonTab from "@/components/CommonTab.vue";
 }
 :deep(.el-main) {
   padding: 10px;
-  // height: 100%;
+  // 最好是 用计算属性
+  height:85%;
 }
 </style>

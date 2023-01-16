@@ -10,3 +10,4 @@ Mock.mock('/home/getCountData',countdataApi.getCountData)
 Mock.mock('/home/getEchartsData',echarsDataApi.getEchartsData)
 //本地获取user数据 /.../是正则的写法
 Mock.mock(/user\/getUser/,'get',userApi.getUserList)
+Mock.mock(/user\/add/,'post',userApi.createUser)
