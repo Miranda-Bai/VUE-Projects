@@ -47,3 +47,12 @@ This template should help get you started developing with Vue 3 in Vite. The tem
         ]
     }
 }
+
+MockData下js文件的返回数据必须是以下code+data的形式，否则返回数据是undefined
+return {
+      code: 200,
+      data: {
+        count: mockList.length,
+        list: pageList,
+      },
+    };

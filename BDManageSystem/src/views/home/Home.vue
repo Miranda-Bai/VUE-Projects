@@ -170,7 +170,7 @@ let videoData = reactive({
 });
 const getChartsData = async () => {
   let result = await proxy.config.globalProperties.$api.getEchartsData();
-  console.log("result: ", result);
+  // console.log("result: ", result);
   let res = result.orderData;
   let userRes = result.userData;
   let videoRes = result.videoData;

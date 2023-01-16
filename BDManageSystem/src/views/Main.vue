@@ -2,8 +2,9 @@
   <div class="common-layout">
     <el-container style="height: 100%">
       <CommonAside></CommonAside>
-      <el-container class="r-container" >
+      <el-container class="r-container">
         <CommonHeader></CommonHeader>
+        <CommonTab></CommonTab>
         <el-main>
           <router-view></router-view>
         </el-main>
@@ -14,10 +15,7 @@
 <script setup>
 import CommonHeader from "@/components/CommonHeader.vue";
 import CommonAside from "@/components/CommonAside.vue";
-
-// 固定右边宽度 180px是侧边栏的宽度
-let width = window.screen.availWidth - 180 +'px';
-console.log("widwo.width =  ",width )
+import CommonTab from "@/components/CommonTab.vue";
 </script>
 <style lang="less" scoped>
 .r-container {
@@ -27,14 +25,20 @@ console.log("widwo.width =  ",width )
   overflow-y: auto;
 }
 .common-layout {
+  box-sizing: border-box;
   height: 100%;
   & > .el-container {
     height: 100%;
     align-items: flex-start;
+
     & > .el-aside {
       height: 100%;
       background-color: #545c64;
     }
   }
+}
+:deep(.el-main) {
+  padding: 10px;
+  // height: 100%;
 }
 </style>

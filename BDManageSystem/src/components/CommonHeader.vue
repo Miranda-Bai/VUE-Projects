@@ -7,13 +7,12 @@
         </el-icon>
       </el-button>
       <!-- 面包屑 -->
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
-        <el-breadcrumb-item
-          ><a href="/">promotion management</a></el-breadcrumb-item
-        >
-        <el-breadcrumb-item>promotion list</el-breadcrumb-item>
-        <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
+      <el-breadcrumb separator="/" class="breadcrumb">
+        <!-- 首页是一定存在的，所以直接写死 -->
+        <el-breadcrumb-item :to="{ path: '/' }">Homepage</el-breadcrumb-item>
+        <el-breadcrumb-item v-if="current" :to="current.path">
+          {{ current.meta.label }}
+        </el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="r-content">
@@ -23,7 +22,7 @@
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>Dashboard</el-dropdown-item>
+            <el-dropdown-item>My profile</el-dropdown-item>
             <el-dropdown-item>Log out</el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -33,14 +32,25 @@
 </template>
 <script setup>
 import { Menu } from "@element-plus/icons-vue";
-import { useAsideStore } from "@/store/index.js";
+import useStore from "@/store/index.js";
+import {computed} from 'vue'
+import { useRoute } from "vue-router";
 
 const imgSrc = new URL("@/assets/images/user.jpeg", import.meta.url).href;
 
-const store = useAsideStore();
+const store = useStore();
 const handleCollapse = () => {
   store.updateIsCollapse();
 };
+const route = useRoute();
+const current = computed(()=>{
+  // return store.currentMenu;
+  if(route.name === 'home'){
+    return null;
+  }
+  // console.log("route:", route.meta.label)
+  return route;
+})
 </script>
 <style lang="less" scoped>
 header {
@@ -70,5 +80,9 @@ header {
       text-decoration: none;
     }
   }
+}
+.breadcrumb :deep(span){
+  color:#fff !important;
+  cursor: pointer !important;
 }
 </style>

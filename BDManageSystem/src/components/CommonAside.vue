@@ -49,7 +49,7 @@
   </el-aside>
 </template>
 <script setup>
-import { useAsideStore } from "@/store/index.js";
+import useStore from "@/store/index.js";
 import { useRouter } from "vue-router";
 
 const list = [
@@ -91,7 +91,7 @@ const hasChildren = list.filter((item) => item.children);
 
 // console.log("haschildren : ", hasChildren);
 
-const store = useAsideStore();
+const store = useStore();
 // console.log("store", store)
 
 const router = useRouter();

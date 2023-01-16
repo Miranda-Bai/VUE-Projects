@@ -34,4 +34,13 @@ export default{
             mock:true,
         })
     },
+    getUserData(params){
+        // console.log("params:", params)
+        return request({
+            url:"/user/getUser",
+            method:"get",
+            data:params,
+            mock:true,
+        })
+    }
 }
