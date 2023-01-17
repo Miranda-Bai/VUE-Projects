@@ -48,8 +48,34 @@ export default{
         })
     },
     addUser(params){
+        // console.log("adduser in api:", params)
         return request({
             url:"/user/add",
+            method:"post",
+            data:params,
+            mock:true,
+        })
+    },
+    editUser(params){
+        return request({
+            url:"/user/edit",
+            method:"post",
+            data:params,
+            mock:true,
+        })
+    },
+    deleteUser(params){
+        return request({
+            url:"/user/delete",
+            method:"get",
+            data:params,
+            mock:true,
+        })
+    },
+    //根据用户的用户名不同返回不一样的菜单列表
+    getMenu(params){
+        return request({
+            url:"/permission/getMenu",
             method:"post",
             data:params,
             mock:true,

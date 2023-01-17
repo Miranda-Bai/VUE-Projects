@@ -1,13 +1,18 @@
 <template>
   <div class="user-header">
-    <el-button type="primary" @click="dialogVisible = true">+ADD</el-button>
+    <el-button type="primary" @click="handleAdd">+ADD</el-button>
     <el-dialog
       v-model="dialogVisible"
-      title="Add New User"
+      :title="action === 'add' ? 'Add New User' : 'Edit User'"
       width="40%"
       :before-close="handleClose"
     >
-      <el-form :inline="true" :model="formUser" ref="userForm" :rules="rules">
+      <el-form
+        :inline="true"
+        :model="formUser"
+        ref="userFormRef"
+        :rules="rules"
+      >
         <el-row>
           <el-col :span="12">
             <el-form-item label="Full Name:" prop="name">
@@ -60,7 +65,7 @@
         <el-row style="justify-content: flex-end">
           <el-form-item>
             <el-button type="primary" @click="handleCancel"> Cancel </el-button>
-            <el-button type="primary" @click="onSubmit(userForm)">Confirm</el-button>
+            <el-button type="primary" @click="onSubmit">Confirm</el-button>
           </el-form-item>
         </el-row>
       </el-form>
@@ -87,9 +92,17 @@
         :width="item.width ? item.width : 125"
       />
       <el-table-column fixed="right" label="Operations" min-width="180">
-        <template #default>
-          <el-button size="small" @click="handleEdit">Edit</el-button>
-          <el-button type="danger" size="small">Delete</el-button>
+        <template #default="scope">
+          <el-button size="small" @click="handleEdit(scope.row)">
+            Edit
+          </el-button>
+          <el-button
+            type="danger"
+            size="small"
+            @click="handleDelete(scope.row)"
+          >
+            Delete
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -103,7 +116,7 @@
   </div>
 </template>
 <script setup>
-import { getCurrentInstance, onMounted, ref, reactive } from "vue";
+import { getCurrentInstance, onMounted, ref, reactive, nextTick } from "vue";
 
 const proxy = getCurrentInstance().appContext;
 const tableLabel = reactive([
@@ -141,7 +154,8 @@ const getUserData = async (config) => {
   let res = await proxy.config.globalProperties.$api.getUserData(config);
 
   list.value = res.list.map((item) => {
-    item.genderLabel = item.gender === 0 ? "female" : "male";
+    item.genderLabel =
+      item.gender === 0 || item.gender === "0" ? "female" : "male";
     return item;
   });
   config.total = res.count;
@@ -168,7 +182,7 @@ const handleClose = (done) => {
   ElMessageBox.confirm("Are you sure to close this dialog?")
     .then(() => {
       //重置表单 记得要给表单项加上对应的prop才会重置成功 el-form-item
-      userForm.value.resetFields();
+      userFormRef.value.resetFields();
       done();
     })
     .catch(() => {
@@ -184,32 +198,57 @@ const formUser = reactive({
   addr: "",
 });
 // el-form ref引用的表单对象
-const userForm = ref(null);
-// 添加用户(传入表单的引用对象)
-const onSubmit = (formEl) => {
+const userFormRef = ref(null);
+// 添加用户
+const onSubmit = () => {
   //提交时对数据做校验
-  formEl.validate(async (valid) => {
+  userFormRef.value.validate(async (valid) => {
     //表单校验通过再提交 validate方法对整个表单进行验证
     if (valid) {
-      let res = await proxy.config.globalProperties.$api.addUser(formUser);
-      console.log("res in adduser:", res);
-      if (res) {
-        //重置表单 记得要给表单项加上对应的prop才会重置成功 el-form-item
-        userForm.value.resetFields();
-        // console.log("userform:", userForm.value)
-        //模态框消失
-        dialogVisible.value = false;
-        //通知添加成功
-        //重新调用getUserData
-        getUserData(config);
+      if (action.value === "add") {
+        let res = await proxy.config.globalProperties.$api.addUser(formUser);
+        // console.log("res in adduser:", res);
+        if (res) {
+          //重置表单 记得要给表单项加上对应的prop才会重置成功 el-form-item
+          userFormRef.value.resetFields();
+          console.log("userFormRef:", userFormRef.value);
+          //模态框消失
+          dialogVisible.value = false;
+          //通知添加成功
+          //重新调用getUserData
+          getUserData(config);
+        }
+      } else {
+        //编辑的接口
+        console.log("action", action.value);
+        formUser.gender =
+          formUser.gender === "female" || formUser.gender === "0" ? 0 : 1;
+        // console.log("formUser:", formUser);
+        let res = await proxy.config.globalProperties.$api.editUser(formUser);
+        console.log("res in editUser:", res);
+        if (res) {
+          //重置表单 记得要给表单项加上对应的prop才会重置成功 el-form-item
+          userFormRef.value.resetFields();
+          //模态框消失
+          dialogVisible.value = false;
+          //通知添加成功
+          //重新调用getUserData
+          getUserData(config);
+        }
       }
+    } else {
+      ElMessage({
+        showClose: true,
+        message: "Please enter correct content",
+        type: "error",
+      });
     }
   });
 };
 // 点击取消按钮时，要清空表单内容
 const handleCancel = () => {
   //重置表单 记得要给表单项加上对应的prop才会重置成功 el-form-item
-  userForm.value.resetFields();
+  userFormRef.value.resetFields();
   //模态框消失
   dialogVisible.value = false;
 };
@@ -224,10 +263,48 @@ const rules = reactive({
   birth: [{ required: true, message: "Please select your birthday" }],
   addr: [{ required: true, message: "Please enter your address" }],
 });
+//区分编辑和新增
+const action = ref("add");
+//新增按钮
+const handleAdd = () => {
+  action.value = "add";
+  dialogVisible.value = true;
+};
 //编辑按钮
-const handleEdit = ()=>{
-  
-}
+const handleEdit = (row) => {
+  // console.log("row:", row);
+  action.value = "edit";
+  dialogVisible.value = true;
+  row.gender = row.gender === 0 || row.gender === "female" ? "female" : "male";
+  //在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM
+  //防止点击编辑后再点击新增模态框中有数据
+  nextTick(() => {
+    //浅拷贝 把值赋给模态框
+    Object.assign(formUser, row);
+  });
+};
+//删除按钮
+const handleDelete = (row) => {
+  console.log("row in delete", row);
+
+  ElMessageBox.confirm("Are you sure to delete this user?")
+    .then(async () => {
+      let res = await proxy.config.globalProperties.$api.deleteUser({
+        id: row.id,
+      });
+      console.log("res in delete:", res);
+      ElMessage({
+        showClose: true,
+        message: "delete successful",
+        type: "success",
+      });
+      getUserData(config);
+      done();
+    })
+    .catch(() => {
+      // catch error
+    });
+};
 onMounted(() => {
   getUserData(config);
 });

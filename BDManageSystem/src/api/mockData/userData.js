@@ -67,19 +67,19 @@ export default {
   },
   /**
    * 增加用户
-   * @param name, addr, age, birth, sex
+   * @param name, addr, age, birth, gender
    * @return {{code: number, data: {message: string}}}
    */
   createUser: (config) => {
-    const { name, addr, age, birth, sex } = JSON.parse(config.body);
-    console.log(JSON.parse(config.body));
+    const { name, addr, age, birth, gender } = JSON.parse(config.body);
+    // console.log("data in createuser:",JSON.parse(config.body));
     List.unshift({
       id: Mock.Random.guid(),
       name: name,
       addr: addr,
       age: age,
       birth: birth,
-      sex: sex,
+      gender: gender,
     });
     return {
       code: 200,
@@ -128,19 +128,20 @@ export default {
   },
   /**
    * 修改用户
-   * @param id, name, addr, age, birth, sex
+   * @param id, name, addr, age, birth, gender
    * @return {{code: number, data: {message: string}}}
    */
   updateUser: (config) => {
-    const { id, name, addr, age, birth, sex } = JSON.parse(config.body);
-    const sex_num = parseInt(sex);
+    const { id, name, addr, age, birth, gender } = JSON.parse(config.body);
+    // console.log("data in createuser:",JSON.parse(config.body));
+    const gender_num = parseInt(gender);
     List.some((u) => {
       if (u.id === id) {
         u.name = name;
         u.addr = addr;
         u.age = age;
         u.birth = birth;
-        u.sex = sex_num;
+        u.gender = gender_num;
         return true;
       }
     });
