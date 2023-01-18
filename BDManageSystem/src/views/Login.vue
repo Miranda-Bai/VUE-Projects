@@ -14,6 +14,8 @@
 </template>
 <script setup>
 import {reactive, getCurrentInstance} from 'vue'
+import useStore from "@/store/index.js";
+import { useRouter } from "vue-router";
 
 const loginForm =reactive({
     username:"admin",
@@ -24,9 +26,18 @@ const loginForm =reactive({
 // 解构的写法
 const {proxy} = getCurrentInstance();
 // console.log("proxy:", proxy.$api)
+const store = useStore();
+const router = useRouter();
 const login = async()=>{
     const res = await proxy.$api.getMenu(loginForm)
-    console.log("res in login:", res)
+    // console.log("res in login:", res)
+    store.setMenu(res.menu);
+    store.addMenu(router);
+    store.setToken(res.token);
+    //跳转到首页
+    router.push({
+        name:"home"
+    })
 }
 </script>
 <style lang="less" scoped>

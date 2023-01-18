@@ -83,16 +83,17 @@ const list = [
     ],
   },
 ];
-
-const noChildren = list.filter((item) => !item.children);
-
-// console.log("nochildren : ", noChildren);
-const hasChildren = list.filter((item) => item.children);
-
-// console.log("haschildren : ", hasChildren);
-
 const store = useStore();
 // console.log("store", store)
+//取自store的侧边栏
+const asyncLst = store.menu;
+
+const noChildren = asyncLst.filter((item) => !item.children);
+
+// console.log("nochildren : ", noChildren);
+const hasChildren = asyncLst.filter((item) => item.children);
+
+// console.log("haschildren : ", hasChildren);
 
 const router = useRouter();
 const clickMenu = (item) => {

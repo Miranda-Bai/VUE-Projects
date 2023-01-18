@@ -13,41 +13,47 @@ export default {
             {
               path: '/home',
               name: 'home',
-              label: '首页',
-              icon: 's-home',
-              url: 'Home.vue'
+              meta:{label: 'Homepage',},
+              label: 'Homepage',
+              icon: 'house',
+              url: '/home/Home.vue'
             },
             {
               path: '/mall',
               name: 'mall',
-              label: '商品管理',
+              meta:{label: 'Stock',},
+              label: 'Stock',
               icon: 'video-play',
               url: 'Mall.vue'
             },
             {
               path: '/user',
               name: 'user',
-              label: '用户管理',
+              meta:{label: 'User Management',},
+              label: 'User Management',
               icon: 'user',
-              url: 'User.vue'
+              url: '/User/User.vue'
             },
             {
-              label: '其他',
+              path: "/other",
+              label: 'Others',
               icon: 'location',
               children: [
                 {
                   path: '/page1',
                   name: 'page1',
-                  label: '页面1',
+                  meta:{label: 'Page One',},
+                  label: 'Page One',
                   icon: 'setting',
-                  url: 'PageOne.vue'
+                  url: 'Page1.vue'
                 },
                 {
                   path: '/page2',
                   name: 'page2',
-                  label: '页面2',
+                  meta:{label: 'Page Two',},
+                  label: 'Page Two',
                   icon: 'setting',
-                  url: 'PageTwo.vue'
+                  url: 'Page2.vue'
                 }
               ]
             }
@@ -64,14 +70,16 @@ export default {
             {
               path: '/home',
               name: 'home',
-              label: '首页',
-              icon: 's-home',
-              url: 'Home.vue'
+              meta:{label: 'Homepage',},
+              label: 'Homepage',
+              icon: 'house',
+              url: '/home/Home.vue'
             },
             {
-              path: '/video',
-              name: 'video',
-              label: '商品管理',
+              path: '/mall',
+              name: 'mall',
+              meta:{label: 'Stock',},
+              label: 'Stock',
               icon: 'video-play',
               url: 'Mall.vue'
             }

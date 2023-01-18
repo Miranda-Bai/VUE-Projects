@@ -4,8 +4,9 @@ const routes = [
   {
     path: "/",
     component: () => import("@/views/main.vue"),
+    name: "home1",
     redirect: "/home",
-    children: [
+    /* children: [
       {
         path: "/home",
         name: "home",
@@ -30,7 +31,14 @@ const routes = [
         meta: { label: "Page Two" },
         component: () => import("@/views/Page2.vue"),
       },
-    ],
+      {
+        path: "/mall",
+        name: "mall",
+        meta: { label: "Stock" },
+        component: () => import("@/views/Mall.vue"),
+      },
+ ],*/
+    children: [],
   },
   {
     path: "/login",

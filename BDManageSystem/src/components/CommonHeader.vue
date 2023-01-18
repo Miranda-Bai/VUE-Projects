@@ -23,7 +23,7 @@
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item>My profile</el-dropdown-item>
-            <el-dropdown-item>Log out</el-dropdown-item>
+            <el-dropdown-item @click="handleLogout">Log out</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -33,8 +33,8 @@
 <script setup>
 import { Menu } from "@element-plus/icons-vue";
 import useStore from "@/store/index.js";
-import {computed} from 'vue'
-import { useRoute } from "vue-router";
+import { computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 const imgSrc = new URL("@/assets/images/user.jpeg", import.meta.url).href;
 
@@ -43,14 +43,22 @@ const handleCollapse = () => {
   store.updateIsCollapse();
 };
 const route = useRoute();
-const current = computed(()=>{
+const current = computed(() => {
   // return store.currentMenu;
-  if(route.name === 'home'){
+  if (route.name === "home") {
     return null;
   }
   // console.log("route:", route.meta.label)
   return route;
-})
+});
+const router = useRouter();
+const handleLogout = () => {
+  store.clearMenu();
+  store.clearToken();
+  router.push({
+    name: "login",
+  });
+};
 </script>
 <style lang="less" scoped>
 header {
@@ -81,8 +89,8 @@ header {
     }
   }
 }
-.breadcrumb :deep(span){
-  color:#fff !important;
+.breadcrumb :deep(span) {
+  color: #fff !important;
   cursor: pointer !important;
 }
 </style>
